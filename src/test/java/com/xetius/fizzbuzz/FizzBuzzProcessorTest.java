@@ -19,8 +19,11 @@ public class FizzBuzzProcessorTest {
 
     @Before
     public void setUp() throws Exception {
+        FizzBuzzStats stats = new FizzBuzzStats();
+
         processor = new FizzBuzzProcessor();
         processor.setFizzBuzzer(fizzBuzzer);
+        processor.setStats(stats);
     }
 
     @Test

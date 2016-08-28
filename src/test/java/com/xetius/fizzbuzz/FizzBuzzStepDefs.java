@@ -10,14 +10,18 @@ public class FizzBuzzStepDefs {
 
     @Given("^if I run the program over a range from (\\d+)-(\\d+)$")
     public void ifIRunTheProgramOverARangeFrom(int from, int to) throws Throwable {
+        FizzBuzzStats stats = new FizzBuzzStats();
+        FizzBuzzer fizzBuzzer = new FizzBuzzer();
+        fizzBuzzer.setStats(stats);
         processor = new FizzBuzzProcessor();
         processor.setParameters(from, to);
-        processor.setFizzBuzzer(new FizzBuzzer());
+        processor.setStats(stats);
+        processor.setFizzBuzzer(fizzBuzzer);
     }
 
-    @Then("^I should get the output: (.*)$")
+    @Then("^I should get the output:$")
     public void iShouldGetTheOutput(String expectedOutput) throws Throwable {
         String actualOutput = processor.process();
-        assertThat(expectedOutput).isEqualTo(actualOutput);
+        assertThat(actualOutput).isEqualTo(expectedOutput);
     }
 }

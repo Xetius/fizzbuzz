@@ -3,15 +3,20 @@ package com.xetius.fizzbuzz;
 import org.junit.Before;
 import org.junit.Test;
 
+import static com.xetius.fizzbuzz.FizzBuzzValue.FIZZ;
+import static com.xetius.fizzbuzz.FizzBuzzValue.NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class FizzBuzzerTest {
 
     private FizzBuzzer fizzBuzzer;
+    private FizzBuzzStats stats;
 
     @Before
     public void setUp() throws Exception {
+        stats = new FizzBuzzStats();
         fizzBuzzer = new FizzBuzzer();
+        fizzBuzzer.setStats(stats);
     }
 
     @Test
@@ -54,5 +59,17 @@ public class FizzBuzzerTest {
     public void fizzBuzzWillReturnLuck_whenNumberEndsWithThree() throws Exception {
         String response = fizzBuzzer.fizzBuzz(3);
         assertThat(response).isEqualTo("luck");
+    }
+
+    @Test
+    public void callingFizzBuzzWithFizzNumberIncrementsFizzCount() throws Exception {
+        fizzBuzzer.fizzBuzz(6);
+        assertThat(stats.get(FIZZ)).isEqualTo(1);
+    }
+
+    @Test
+    public void callingFizzBuzzwithNumberIncrementsNumberCount() throws Exception {
+        fizzBuzzer.fizzBuzz(4);
+        assertThat(stats.get(NUMBER)).isEqualTo(1);
     }
 }

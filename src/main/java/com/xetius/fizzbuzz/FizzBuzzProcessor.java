@@ -4,12 +4,12 @@ import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.joining;
 
-public class FizzBuzzProcessor {
+class FizzBuzzProcessor {
     private int from;
     private int to;
 
     private FizzBuzzer fizzBuzzer;
-
+    private FizzBuzzStats stats;
 
     void setParameters(Integer start, Integer end) {
         this.from = start;
@@ -20,10 +20,16 @@ public class FizzBuzzProcessor {
         return IntStream
                 .rangeClosed(from, to)
                 .mapToObj(fizzBuzzer::fizzBuzz)
-                .collect(joining(" "));
+                .collect(joining(" ")) +
+                "\n" +
+                stats.print();
     }
 
-    public void setFizzBuzzer(FizzBuzzer fizzBuzzer) {
+    void setFizzBuzzer(FizzBuzzer fizzBuzzer) {
         this.fizzBuzzer = fizzBuzzer;
+    }
+
+    void setStats(FizzBuzzStats stats) {
+        this.stats = stats;
     }
 }

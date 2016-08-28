@@ -12,8 +12,12 @@ public class Main {
 
     public static void main(String[] args) {
         Main main = new Main();
+        FizzBuzzStats stats = new FizzBuzzStats();
         FizzBuzzProcessor processor = new FizzBuzzProcessor();
-        processor.setFizzBuzzer(new FizzBuzzer());
+        processor.setStats(stats);
+        FizzBuzzer fizzBuzzer = new FizzBuzzer();
+        fizzBuzzer.setStats(stats);
+        processor.setFizzBuzzer(fizzBuzzer);
         main.setProcessor(processor);
         main.run(args);
     }
@@ -41,7 +45,7 @@ public class Main {
             end = Integer.parseInt(args[1]);
             return true;
 
-        } catch (NumberFormatException ex){
+        } catch (NumberFormatException ex) {
             log.error("Numeric parameters required");
             return false;
         }

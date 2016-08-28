@@ -7,6 +7,8 @@ class FizzBuzzer {
     private static final String FIZZBUZZ = "fizzbuzz";
     private static final String LUCK = "luck";
 
+    private FizzBuzzStats stats = new FizzBuzzStats();
+
     String fizzBuzz(int i) {
         String response = String.valueOf(i);
         if (isDivisibleByThree(i)) {
@@ -24,6 +26,9 @@ class FizzBuzzer {
         if (endsWithThree(i)) {
             response = LUCK;
         }
+
+        stats.record(response);
+
         return response;
     }
 
@@ -41,5 +46,9 @@ class FizzBuzzer {
 
     private boolean endsWithThree(int i) {
         return (i % 10 == 3);
+    }
+
+    void setStats(FizzBuzzStats stats) {
+        this.stats = stats;
     }
 }
