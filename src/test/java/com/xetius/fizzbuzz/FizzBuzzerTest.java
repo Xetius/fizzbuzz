@@ -22,7 +22,7 @@ public class FizzBuzzerTest {
 
     @Test
     public void fizzBuzzWillReturnFizz_whenTheNumberIsDivisibleByThree() throws Exception {
-        String response = fizzBuzzer.fizzBuzz(3);
+        String response = fizzBuzzer.fizzBuzz(6);
         assertThat(response).isEqualTo("fizz");
     }
 
@@ -48,5 +48,11 @@ public class FizzBuzzerTest {
     public void fizzBuzzWillReturnFizzBuzz_whenNumberIsDivisibleByBothFiveAndThree() throws Exception {
         String response = fizzBuzzer.fizzBuzz(15);
         assertThat(response).isEqualTo("fizzbuzz");
+    }
+
+    @Test
+    public void fizzBuzzWillReturnLuck_whenNumberEndsWithThree() throws Exception {
+        String response = fizzBuzzer.fizzBuzz(3);
+        assertThat(response).isEqualTo("luck");
     }
 }

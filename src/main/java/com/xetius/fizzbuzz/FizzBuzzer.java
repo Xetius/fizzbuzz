@@ -5,6 +5,7 @@ class FizzBuzzer {
     private static final String FIZZ = "fizz";
     private static final String BUZZ = "buzz";
     private static final String FIZZBUZZ = "fizzbuzz";
+    private static final String LUCK = "luck";
 
     String fizzBuzz(int i) {
         String response = String.valueOf(i);
@@ -20,6 +21,9 @@ class FizzBuzzer {
             response = FIZZBUZZ;
         }
 
+        if (endsWithThree(i)) {
+            response = LUCK;
+        }
         return response;
     }
 
@@ -33,5 +37,9 @@ class FizzBuzzer {
 
     private boolean isDivisibleBy(int i, int dividedBy) {
         return i % dividedBy == 0;
+    }
+
+    private boolean endsWithThree(int i) {
+        return (i % 10 == 3);
     }
 }
