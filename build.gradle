@@ -1,0 +1,60 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version '1.2.3'
+}
+
+group 'com.xetius'
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testRuntime
+    }
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.xetius.fizzbuzz.Main'
+    }
+}
+
+shadowJar {
+    baseName = 'fizzbuzz'
+    classifier = null
+	version = null
+}
+
+task cucumber() {
+    dependsOn assemble, compileTestJava
+    doLast {
+        javaexec {
+            main = "cucumber.api.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin', 'pretty', '--glue', 'com.xetius.fizzbuzz', 'src/test/resources']
+        }
+    }
+}
+
+build.dependsOn(check, cucumber, shadowJar)
+
+dependencies {
+
+    compile 'ch.qos.logback:logback-classic:1.1.7'
+
+    testCompile 'info.cukes:cucumber-java:1.2.4'
+    testCompile 'info.cukes:cucumber-junit:1.2.4'
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    testCompile 'org.assertj:assertj-core:3.5.2'
+    testCompile 'org.mockito:mockito-core:2.0.17-beta'
+}
+
+
